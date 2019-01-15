@@ -1,5 +1,6 @@
 import requests
 import argparse
+import json
 from config import currencies, defaults
 
 allowed_currencies = sorted({x for item in currencies.items() for x in item})
@@ -53,19 +54,40 @@ def get_currency_rates(base):
     response = requests.get(URL)
 
     print(response.status_code)
-    return response.json()
+    return response.json()['rates']
 
+def conversion(amount, rates, output_currency=None):
+
+    result = {k:round(v*amount,2) for k,v in rates.items()}
+
+    if output_currency:
+        result = {output_currency : result[output_currency]}
+
+    return result
+
+def get_results(amount, input_currency, converted_data):
+
+    final_data = {'input': {'amount': None, 'currency': None}, 'output': {} }
+
+    final_data['input'].update(amount = amount, currency = input_currency)
+    final_data.update(output = converted_data)
+
+    return final_data
 
 def main(payload):
 
-	amount = payload['amount']
-	base = payload['input_currency']
-	output_currency = payload['output_currency']
+    amount = payload['amount']
+    base = payload['input_currency']
+    output_currency = payload['output_currency']
 
-	raw_data = get_currency_rates(base)
+    raw_data = get_currency_rates(base)
+    converted_data = conversion(amount, raw_data, output_currency = output_currency)
+    final_data = get_results(amount, base, converted_data)
+    return json.dumps(final_data, indent=4, sort_keys=True)
 
 if __name__ == '__main__':
 
     payload = parser()
     print(payload)
-    main(payload)
+    result = main(payload)
+    print(result)
