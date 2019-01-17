@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Currency Converter</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h2>Currency Converter</h2>
+        <strong><nav>
+          <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+          </ul>
+        </nav></strong>
+      </div>
+    </header>
+    <div>
+        {%block content%}
+        {%endblock%}
+    </div>
+  </body>
+</html>

@@ -1,12 +1,16 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import currency_converter as cuco
 from currency_converter import check_currency
 
 app = Flask(__name__)
 
-@app.route('/about')
+@app.route('/')
+def home():
+	return render_template('home.html')
+
+@app.route('/about/')
 def about():
-	return '<h2>About Application</h2>\nThis application is created for Kiwi interview purpose.\n\n Created by Tomas Cernak. '
+    return render_template("about.html")
 
 @app.route('/currency_converter',methods=['GET'])
 def currency_converter():
