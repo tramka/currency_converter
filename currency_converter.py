@@ -7,11 +7,14 @@ allowed_currencies = sorted({x for item in currencies.items() for x in item})
 
 def positive_value(string):
 
-    value = float(string)
-    if value < 0:
-    	msg = '{} is not positive value.'.format(string)
-    	raise argparse.ArgumentTypeError(msg)
-    return value
+    try:
+        value = float(string)
+        if value < 0:
+        	msg = '{} is not positive number.'.format(string)
+        	raise argparse.ArgumentTypeError(msg)
+        return value
+    except ValueError:
+        raise argparse.ArgumentTypeError('"{}" is not number.'.format(string))
 
 def check_currency(currency):
 
@@ -58,7 +61,7 @@ def get_currency_rates(base):
 
 def conversion(amount, rates, output_currency=None):
 
-    result = {k:round(v*amount,2) for k,v in rates.items()}
+    result = {k:round(v*float(amount),2) for k,v in rates.items()}
 
     if output_currency:
         result = {output_currency : result[output_currency]}
@@ -83,11 +86,12 @@ def main(payload):
     raw_data = get_currency_rates(base)
     converted_data = conversion(amount, raw_data, output_currency = output_currency)
     final_data = get_results(amount, base, converted_data)
-    return json.dumps(final_data, indent=4, sort_keys=True)
+    return final_data
+    #return json.dumps(final_data, indent=4, sort_keys=True)
 
 if __name__ == '__main__':
 
     payload = parser()
     print(payload)
     result = main(payload)
-    print(result)
+    print(json.dumps(result, indent=4, sort_keys=True))
