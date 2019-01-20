@@ -34,7 +34,9 @@ Script creates results in main directory.
 
 Examples:
 
-``./currency_converter.py --amount 100.0 --input_currency EUR --output_currency CZK
+```json
+./currency_converter.py --amount 100.0 --input_currency EUR --output_currency CZK
+
 {
     "input": {
         "amount": 100.0,
@@ -43,9 +45,11 @@ Examples:
     "output": {
         "CZK": 2558.0
     }
-}``
+}
+```
 
-``./currency_converter.py --amount 10.92 --input_currency £
+```json
+./currency_converter.py --amount 10.92 --input_currency £
 {
     "input": {
         "amount": 10.92,
@@ -86,7 +90,8 @@ Examples:
         "USD": 14.13,
         "ZAR": 194.78
     }
-}``
+}
+```
 
 ### Web Application
 
@@ -100,7 +105,8 @@ Open the browser and use following links:
 
 Examples:
 
-``GET /currency_converter?amount=0.9&input_currency=¥&output_currency=AUD HTTP/1.1
+```json
+GET /currency_converter?amount=0.9&input_currency=¥&output_currency=AUD HTTP/1.1
 {
   "input": {
     "amount": 0.9,
@@ -109,9 +115,11 @@ Examples:
   "output": {
     "AUD": 0.01
   }
-}``
+}
+```
 
-``GET /currency_converter?amount=10.92&input_currency=£ HTTP/1.1
+```json
+GET /currency_converter?amount=10.92&input_currency=£ HTTP/1.1
 {
   "input": {
     "amount": 10.92,
@@ -129,7 +137,8 @@ Examples:
     "EUR": 12.39,
     ...
   }
-}``
+}
+```
 
 ## Contributing
 Any idea how to improve project is welcomed. You can create issue here or write message to the email.
