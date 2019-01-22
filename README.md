@@ -20,6 +20,17 @@ https://www.python.org/getit/.
 To make script work, create virtual environment and then clone repository. After that, run:
 ``pip install -r requirements.txt``
 
+### Docker
+To run web application, you can use also docker. To build and run a docker, use:
+
+``docker build -t currencies:latest``
+
+``docker run -d -p 5000:5000 currencies:latest``
+
+After that, open the browser and load:
+
+``http://localhost:5000/``
+
 ## Usage
 
 ### CLI Application
