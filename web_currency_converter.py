@@ -94,8 +94,8 @@ def unhandled_exception(e):
     """
     Handling other uncaught errors.
     """
-    return render_template("generic.html")
+    return render_template("generic.html", error=e)
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True, host='0.0.0.0', port=5000)
